@@ -1,9 +1,12 @@
 # Twitch Typescript Library (IN DEVELOPMENT)
 
 This is a lightweight Typescript-based library designed to interface with the
-Twitch API and EventSub via webhook. The library primarily focuses on types.
+Twitch API and EventSub via webhooks. The library provides type definitions and
+authentication abstractions via app client credentials.
 
 ## API
+
+The API client provides a simple interface to make requests to the Twitch API.
 
 Note: This library is still in development. Not all events or API calls
 are supported.
@@ -91,3 +94,13 @@ app.use(getExpressMiddleware('MySuperSecretValue', myEventClient))
 // Start the server on port 8000.
 app.listen(8000, () => {})
 ```
+
+### Disclaimer
+
+This Twitch API library is an unofficial software tool developed independently
+and is not endorsed, supported, or affiliated with Twitch Interactive, Inc.
+Please note that the use of this library is at your own risk. We do not
+guarantee its accuracy, reliability, or compatibility with Twitch services.
+Twitch and its related trademarks are the property of Twitch Interactive, Inc.
+For official Twitch API documentation and support, please refer to the official
+[Twitch Developer Portal](https://dev.twitch.tv/docs/).

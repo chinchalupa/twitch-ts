@@ -1,7 +1,6 @@
 import type { Subscription } from '../../../subscription/subscription'
 
 export type ChannelSubscriptionGift = 'channel.subscription.gift'
-
 export type ChannelSubscriptionGiftSubscription = Subscription<
     ChannelSubscriptionGift,
     '1',
@@ -9,7 +8,6 @@ export type ChannelSubscriptionGiftSubscription = Subscription<
         broadcaster_user_id: string
     }
 >
-
 export type ChannelSubscriptionGiftEvent = {
     broadcaster_user_id: string
     broadcaster_user_login: string
@@ -26,4 +24,3 @@ export type ChannelSubscriptionGiftEvent = {
     is_anonymous: true
     cumulative_total: number
 })
-

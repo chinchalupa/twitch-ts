@@ -1,7 +1,6 @@
-import type { Subscription } from "../../../subscription/subscription"
+import type { Subscription } from '../../../subscription/subscription'
 
 export type ChannelChatNotification = 'channel.chat.notification'
-
 export type ChannelChatNotificationSubscription = Subscription<
     ChannelChatNotification,
     '1',
@@ -10,7 +9,6 @@ export type ChannelChatNotificationSubscription = Subscription<
         user_id: string
     }
 >
-
 export type ChannelChatNotificationEvent = {
     broadcaster_user_id: string
     broadcaster_user_name: string

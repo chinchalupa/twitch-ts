@@ -1,4 +1,4 @@
-import { Subscription } from "../../../subscription/subscription"
+import type { Subscription } from '../../../subscription/subscription'
 
 export type ChannelChatClear = 'channel.chat.clear'
 

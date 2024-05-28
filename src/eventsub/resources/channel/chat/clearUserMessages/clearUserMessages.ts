@@ -1,7 +1,6 @@
-import { Subscription } from '../../../subscription/subscription'
+import type { Subscription } from '../../../subscription/subscription'
 
 export type ChannelChatClearUserMessages = 'channel.chat.clear_user_messages'
-
 export type ChannelChatClearUserMessagesSubscription = Subscription<
     ChannelChatClearUserMessages,
     '1',
@@ -10,7 +9,6 @@ export type ChannelChatClearUserMessagesSubscription = Subscription<
         user_id: string
     }
 >
-
 export type ChannelChatClearUserMessagesEvent = {
     broadcaster_user_id: string
     broadcaster_user_login: string

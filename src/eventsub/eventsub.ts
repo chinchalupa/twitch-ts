@@ -27,7 +27,6 @@ export class EventsubClient {
     }
     automod = {
         message: {
-            // hold: new EventsubSubscriptionEndpoint('automod.message.hold', this.revocationEmitter, this.notificationEmitter),
             hold: this.endpoint.call(this, 'automod.message.hold'),
             update: this.endpoint.call(this, 'automod.message.update'),
         },

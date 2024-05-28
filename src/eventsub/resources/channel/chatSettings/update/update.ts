@@ -1,7 +1,6 @@
 import type { Subscription } from '../../../subscription/subscription'
 
 export type ChannelChatSettingsUpdate = 'channel.chat_settings.update'
-
 export type ChannelChatSettingsUpdateSubscription = Subscription<
     ChannelChatSettingsUpdate,
     '1',
@@ -9,7 +8,6 @@ export type ChannelChatSettingsUpdateSubscription = Subscription<
         broadcaster_user_id: string
     }
 >
-
 export type ChannelChatSettingsUpdateEvent = {
     broadcaster_user_id: string
     broadcaster_user_login: string

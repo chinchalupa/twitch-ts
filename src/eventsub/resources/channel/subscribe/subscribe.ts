@@ -1,7 +1,6 @@
-import { Subscription } from "../../subscription/subscription"
+import type { Subscription } from '../../subscription/subscription'
 
 export type ChannelSubscribe = 'channel.subscribe'
-
 export type ChannelSubscribeSubscription = Subscription<
     ChannelSubscribe,
     '1',
@@ -9,7 +8,6 @@ export type ChannelSubscribeSubscription = Subscription<
         broadcaster_user_id: string
     }
 >
-
 export type ChannelSubscribeEvent = {
     user_id: string
     user_name: string

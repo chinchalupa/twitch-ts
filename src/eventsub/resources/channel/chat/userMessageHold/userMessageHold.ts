@@ -1,7 +1,6 @@
 import type { Subscription } from '../../../subscription/subscription'
 
 export type ChannelChatUserMessageHold = 'channel.chat.user_message_hold'
-
 export type ChannelChatUserMessageHoldSubscription = Subscription<
     ChannelChatUserMessageHold,
     '1',
@@ -10,7 +9,6 @@ export type ChannelChatUserMessageHoldSubscription = Subscription<
         user_id: string
     }
 >
-
 export type ChannelChatUserMessageHoldEvent = {
     broadcaster_user_id: string
     broadcaster_user_login: string

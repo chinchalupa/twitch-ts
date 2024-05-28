@@ -1,4 +1,4 @@
-import type { Subscription } from "../../../subscription/subscription"
+import type { Subscription } from '../../../subscription/subscription'
 
 export type ChannelUnbanRequestCreate = 'channel.unban_request.create'
 export type ChannelUnbanRequestCreateSubscription = Subscription<

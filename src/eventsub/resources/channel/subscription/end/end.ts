@@ -1,7 +1,6 @@
 import type { Subscription } from '../../../subscription/subscription'
 
 export type ChannelSubscriptionEnd = 'channel.subscription.end'
-
 export type ChannelSubscriptionEndSubscription = Subscription<
     ChannelSubscriptionEnd,
     '1',
@@ -9,7 +8,6 @@ export type ChannelSubscriptionEndSubscription = Subscription<
         broadcaster_user_id: string
     }
 >
-
 export type ChannelSubscriptionEndEvent = {
     broadcaster_user_id: string
     broadcaster_user_login: string

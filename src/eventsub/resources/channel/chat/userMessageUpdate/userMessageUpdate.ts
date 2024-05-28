@@ -1,14 +1,12 @@
 import type { Subscription } from '../../../subscription/subscription'
 
 export type ChannelChatUserMessageUpdate = 'channel.chat.user_message_update'
-
 export type ChannelChatUserMessageUpdateSubscription = Subscription<
     ChannelChatUserMessageUpdate,
     '1',
     {
     }
 >
-
 export type ChannelChatUserMessageUpdateEvent = {
     broadcaster_user_id: string
     broadcaster_user_login: string

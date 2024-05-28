@@ -1,4 +1,4 @@
-import { Subscription } from "../../../subscription/subscription"
+import type { Subscription } from '../../../subscription/subscription'
 
 export type ChannelChannelPointsCustomRewardUpdate = 'channel.channel_points_custom_reward.update'
 export type ChannelChannelPointsCustomRewardUpdateSubscription = Subscription<

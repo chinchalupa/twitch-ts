@@ -1,9 +1,6 @@
-import { EventEmitter } from 'events'
 import type { Subscription } from '../../subscription/subscription'
-import { EventsubEmitter } from '../../resource'
 
 export type ChannelUpdate = 'channel.update'
-
 export type ChannelUpdateEvent = {
     broadcaster_user_id: string
     broadcaster_user_login: string
@@ -14,7 +11,6 @@ export type ChannelUpdateEvent = {
     category_name: string
     content_classification_labels: string[]
 }
-
 export type ChannelUpdateSubscription = Subscription<
     ChannelUpdate,
     '2',

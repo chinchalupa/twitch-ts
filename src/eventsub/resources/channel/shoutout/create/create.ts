@@ -16,9 +16,9 @@ export type ChannelShoutoutCreateEvent = {
     moderator_user_id: string
     moderator_user_login: string
     moderator_user_name: string
-    to_broadcast_user_id: string
-    to_broadcast_user_login: string
-    to_broadcast_user_name: string
+    to_broadcaster_user_id: string
+    to_broadcaster_user_login: string
+    to_broadcaster_user_name: string
     started_at: string
     viewer_count: number
     cooldown_ends_at: string

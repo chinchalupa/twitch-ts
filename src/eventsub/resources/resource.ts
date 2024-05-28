@@ -150,7 +150,7 @@ export type EventsubRevocationEventMap = {
 export class SubscriptionEventEmitter<
     Evts extends Record<string, any[]>,
     Type extends keyof Evts,
-    Args extends Evts[Type],
+    Args extends Evts[Type] = Evts[Type],
 > {
     constructor(
         public readonly type: Type,

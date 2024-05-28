@@ -1,6 +1,6 @@
 {
     "name": "twitch-ts",
-    "version": "0.2.1",
+    "version": "0.3.1",
     "description": "An all-in-one Typescript library for the Twitch API and EventSub.",
     "main": "build/main.js",
     "scripts": {

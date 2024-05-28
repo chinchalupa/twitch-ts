@@ -148,6 +148,31 @@ describe('express middleware', () => {
 
                 expect(consoleWarnMock).toHaveBeenCalledTimes(0)
             })
+            test('should subscribe to the event', async () => {
+                const subscriptionType = 'channel.follow'
+                const listener = jest.fn()
+                console.log(client, client.channel, client.channel.follow, client.channel.follow.notification)
+                client.channel.follow.notification.addListener(listener)
+                const data = {subscription: { type: subscriptionType }, event: {}}
+
+                const body = JSON.stringify(data)
+                const enc = validNotificationHeaders['twitch-eventsub-message-id'] +
+                            validNotificationHeaders['twitch-eventsub-message-timestamp'] +
+                            body
+                const signature = createHmac('sha256', validTestSecret).update(enc).digest('hex')
+
+                await expect(fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...validNotificationHeaders,
+                        'twitch-eventsub-message-signature': `sha256=${signature}`,
+                    },
+                    body,
+                })).resolves.toHaveProperty('status', 204)
+                expect(listener).toHaveBeenCalledTimes(1)
+                expect(listener).toHaveBeenCalledWith(data)
+            })
         })
         describe('revocation message type', () => {
             test('returns 204 for valid revocation events', async () => {

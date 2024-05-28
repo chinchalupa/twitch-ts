@@ -70,12 +70,12 @@ export function getEventSubExpressMiddleware(
             }
             case MessageType.Notification: {
                 const notificationData = JSON.parse(body)
-                eventsub.notification(notificationData)
+                eventsub.notification(notificationData.subscription.type).emit(notificationData)
                 break
             }
             case MessageType.Revocation: {
                 const revocationData = JSON.parse(body)
-                eventsub.revocation(revocationData)
+                eventsub.revocation(revocationData.subscription.type).emit(revocationData)
                 break
             }
             default: {

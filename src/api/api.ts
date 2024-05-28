@@ -1,4 +1,5 @@
-import type { DataArray, Cheermote, ExtensionTransaction, Pagination, ChannelInfo, Emote, Badge, ChatSettings, ChatColor, Clip, ContentClassificationLabels, ExtensionLive, Subscription, Stream, Tag, User, Video, SubscriptionEventMap } from "../types"
+import type { Subscription } from "../eventsub/resources/subscription/subscription"
+import type { DataArray, Cheermote, ExtensionTransaction, Pagination, ChannelInfo, Emote, Badge, ChatSettings, ChatColor, Clip, ContentClassificationLabels, ExtensionLive, Stream, Tag, User, Video } from "../types"
 
 export type OAuth2Token = {
     accessToken: string
@@ -30,7 +31,7 @@ export type GetEndpoint = {
     'clips': DataArray<Clip> & Pagination
     'content_classification_labels': DataArray<ContentClassificationLabels>
     'extensions/live': DataArray<ExtensionLive> & Pagination
-    'eventsub/subscriptions': DataArray<Subscription<keyof SubscriptionEventMap>> & Pagination
+    'eventsub/subscriptions': DataArray<Subscription<string, string, object>> & Pagination
     'games/top': DataArray<{id: string, name: string, box_art_url: string, igdb_id: string}> & Pagination
     'games': DataArray<{id: string, name: string, box_art_url: string, igdb_id: string}> & Pagination
     'schedule': { data: { segments: { id: string, start_time: string, end_time: string, title: string, canceled_until: string | null, category: { id: string, name: string }, is_recurring: boolean }[]} & { broadcaster_id: string, broadcaster_name: string, broadcaster_login: string, vacation: { start_time: string, end_time: string } | null } } & Pagination
@@ -66,12 +67,12 @@ export type GetEndpointSearchParams = {
 
 export type PostEndpoint = {
     'chat/messages': DataArray<{message_id: string, is_sent: boolean }>
-    'eventsub/subscriptions': DataArray<Subscription<keyof SubscriptionEventMap>> & { total: number, total_cost: number, max_total_cost: number }
+    'eventsub/subscriptions': DataArray<Subscription<string, string, object>> & { total: number, total_cost: number, max_total_cost: number }
 }
 
 export type PostEnpdointData = {
     'chat/messages': { broadcaster_id: string, sender_id: string, message: string, reply_parent_message_id?: string }
-    'eventsub/subscriptions': Subscription<keyof SubscriptionEventMap>
+    'eventsub/subscriptions': Subscription<string, string, object>
 }
 
 export type DeleteEndpointSearchParams = {

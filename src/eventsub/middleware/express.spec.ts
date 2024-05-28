@@ -2,13 +2,13 @@ import { afterAll, beforeAll, describe, expect, jest, test } from '@jest/globals
 import { createHmac, randomBytes } from 'node:crypto'
 import express from 'express'
 import { getEventSubExpressMiddleware } from './express'
-import { eventSubClient } from '../eventsub'
+import { EventsubClient } from '../eventsub'
 
 describe('express middleware', () => {
     test.each([1, 101])('should throw an error if the secret is an invalid size', (secret) => {
         expect(() => getEventSubExpressMiddleware(
             randomBytes(secret).toString('hex'),
-            eventSubClient(),
+            new EventsubClient(),
         )).toThrowError()
     })
 
@@ -17,7 +17,7 @@ describe('express middleware', () => {
         const addr = 'http://localhost'
         const url = new URL(`${addr}:${port}`)
         const validTestSecret = randomBytes(20).toString('hex')
-        const client = eventSubClient()
+        const client = new EventsubClient()
 
         let app: ReturnType<typeof express>
         let server: ReturnType<typeof app.listen>
@@ -85,28 +85,6 @@ describe('express middleware', () => {
                 body: JSON.stringify({subscription: { type: 'channel.follow' }, event: {}}),
             })).resolves.toHaveProperty('status', 403)
         })
-        describe('notification message type', () => {
-            test('returns 204 for valid notification events', async () => {
-                const body = JSON.stringify({subscription: { type: 'channel.follow' }, event: {}})
-                const enc = validNotificationHeaders['twitch-eventsub-message-id'] +
-                            validNotificationHeaders['twitch-eventsub-message-timestamp'] +
-                            body
-                const signature = createHmac('sha256', validTestSecret).update(enc).digest('hex')
-                const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation(() => {})
-
-                await expect(fetch(url, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        ...validNotificationHeaders,
-                        'twitch-eventsub-message-signature': `sha256=${signature}`,
-                    },
-                    body,
-                })).resolves.toHaveProperty('status', 204)
-
-                expect(consoleWarnMock).toHaveBeenCalledTimes(0)
-            })
-        })
         describe('webhook_callback_verification message type', () => {
             test('returns 204 for valid challenges', async () => {
                 const challenge = randomBytes(8).toString('hex')
@@ -147,6 +125,28 @@ describe('express middleware', () => {
                 })
 
                 await expect(res.text()).resolves.toEqual(challenge)
+            })
+        })
+        describe('notification message type', () => {
+            test('returns 204 for valid notification events', async () => {
+                const body = JSON.stringify({subscription: { type: 'channel.follow' }, event: {}})
+                const enc = validNotificationHeaders['twitch-eventsub-message-id'] +
+                            validNotificationHeaders['twitch-eventsub-message-timestamp'] +
+                            body
+                const signature = createHmac('sha256', validTestSecret).update(enc).digest('hex')
+                const consoleWarnMock = jest.spyOn(console, 'warn').mockImplementation(() => {})
+
+                await expect(fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...validNotificationHeaders,
+                        'twitch-eventsub-message-signature': `sha256=${signature}`,
+                    },
+                    body,
+                })).resolves.toHaveProperty('status', 204)
+
+                expect(consoleWarnMock).toHaveBeenCalledTimes(0)
             })
         })
         describe('revocation message type', () => {

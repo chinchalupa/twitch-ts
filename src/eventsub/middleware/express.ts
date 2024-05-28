@@ -1,6 +1,6 @@
 import { type RequestHandler } from 'express'
 import { createHmac, timingSafeEqual } from 'node:crypto'
-import { type EventSub } from '../eventsub'
+import { EventsubClient } from '../eventsub'
 
 const TwitchHeaders = [
     'twitch-eventsub-message-id',
@@ -26,7 +26,7 @@ enum MessageType {
  */
 export function getEventSubExpressMiddleware(
     secret: string,
-    eventsub: EventSub,
+    eventsub: EventsubClient,
 ): RequestHandler {
     if (secret.length < 10 || secret.length > 100) {
         throw new Error('Twitch EventSub validation middleware secret must be between 10 and 100 characters.')
@@ -70,14 +70,12 @@ export function getEventSubExpressMiddleware(
             }
             case MessageType.Notification: {
                 const notificationData = JSON.parse(body)
-                eventsub.emitNotification(notificationData)
-                res.sendStatus(204)
+                eventsub.notification(notificationData)
                 break
             }
             case MessageType.Revocation: {
                 const revocationData = JSON.parse(body)
-                eventsub.emitRevocation(revocationData)
-                res.sendStatus(204)
+                eventsub.revocation(revocationData)
                 break
             }
             default: {
@@ -86,6 +84,7 @@ export function getEventSubExpressMiddleware(
                 return
             }
         }
+        return res.sendStatus(204)
     }
 
     return handler

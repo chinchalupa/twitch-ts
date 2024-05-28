@@ -1,0 +1,39 @@
+{
+    "subscription": {
+        "id": "0b7f3361-672b-4d39-b307-dd5b576c9b28",
+        "status": "enabled",
+        "type": "channel.channel_points_custom_reward_redemption.add",
+        "version": "1",
+        "condition": {
+            "broadcaster_user_id": "1971641",
+            "user_id": "2914196"
+        },
+        "transport": {
+            "method": "websocket",
+            "session_id": "AgoQHR3s6Mb4T8GFB1l3DlPfiRIGY2VsbC1h"
+        },
+        "created_at": "2023-11-06T18:11:47.492253549Z",
+        "cost": 0
+    },
+    "event": {
+        "id": "12345",
+        "broadcaster_user_id": "67890",
+        "broadcaster_user_login": "broadcaster_login",
+        "broadcaster_user_name": "Broadcaster Name",
+        "user_id": "23456",
+        "user_login": "user_login",
+        "user_name": "User Name",
+        "user_input": "This is user input.",
+        "status": "fulfilled",
+        "redeemed_at": "2022-12-31T23:59:59Z",
+        "reward": {
+            "id": "78901",
+            "title": "Reward Title",
+            "prompt": "This is a prompt for the reward.",
+            "cost": 1000,
+            "is_user_input_required": false,
+            "is_sub_only": true,
+            "image": "https://example.com/image.png"
+        }
+    }
+}
